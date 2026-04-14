@@ -5,54 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sorteo Boletos Dorados</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Esto evita que el cursor se vea raro y asegura el clic */
+        .nav-link { cursor: pointer; }
+    </style>
 </head>
 <body class="bg-slate-900 text-white font-sans">
 
-    <nav class="bg-slate-800 p-4 shadow-xl">
+    <nav class="bg-slate-800 p-4 shadow-xl border-b border-slate-700">
         <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold text-yellow-500">Boletos Dorados</h1>
+            <h1 class="text-2xl font-bold text-yellow-500 tracking-tighter">BOLETOS DORADOS</h1>
             <ul class="flex gap-6">
-                <li><a href="#" onclick="mostrarSeccion('inicio')" class="hover:text-yellow-400">Inicio</a></li>
-                <li><a href="#" onclick="mostrarSeccion('canjear')" class="hover:text-yellow-400">Canjear</a></li>
-                <li><a href="#" class="hover:text-yellow-400 text-red-400">Sorteo</a></li>
+                <li><span onclick="mostrarSeccion('inicio')" class="nav-link hover:text-yellow-400 font-medium transition">Inicio</span></li>
+                <li><span onclick="mostrarSeccion('canjear')" class="nav-link hover:text-yellow-400 font-medium transition">Canjear</span></li>
+                <li><span class="nav-link text-red-500 opacity-50 cursor-not-allowed">Sorteo</span></li>
             </ul>
         </div>
     </nav>
 
-    <main id="seccion-inicio" class="container mx-auto mt-10 text-center px-4">
-        <h2 class="text-4xl font-extrabold mb-4">¡Bienvenidos a la Comunidad!</h2>
-        <p class="text-slate-400 mb-8">Próximamente podrás canjear tus códigos aquí.</p>
-        
-        <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 inline-block shadow-2xl">
-            <p class="text-lg">Estado del sistema: <span class="text-green-400 font-mono">EN LÍNEA</span></p>
+    <main id="seccion-inicio" class="container mx-auto mt-16 text-center px-4 animate-fade-in">
+        <div class="max-w-2xl mx-auto">
+            <h2 class="text-5xl font-black mb-6 bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+                ¡BIENVENIDOS!
+            </h2>
+            <p class="text-slate-400 text-lg mb-10">La plataforma oficial para reclamar tus premios del sorteo.</p>
+            
+            <div class="bg-slate-800/50 p-6 rounded-3xl border border-yellow-500/20 backdrop-blur-sm">
+                <p class="text-sm uppercase tracking-widest text-slate-500 mb-2">Estado del Servidor</p>
+                <div class="flex items-center justify-center gap-2">
+                    <span class="relative flex h-3 w-3">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                    </span>
+                    <span class="text-green-400 font-mono font-bold">SISTEMA ACTIVO</span>
+                </div>
+            </div>
         </div>
     </main>
 
-    <main id="seccion-canjear" class="container mx-auto mt-10 text-center px-4 hidden">
-        <h2 class="text-4xl font-extrabold mb-4 text-yellow-500">Canjear Código</h2>
-        <p class="text-slate-400 mb-8">Ingresa tu código secreto para recibir tu premio.</p>
-        
-        <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 inline-block shadow-2xl w-full max-w-md text-left">
-            <label class="block mb-2 text-sm font-medium">Código del Boleto:</label>
-            <input type="text" placeholder="Ej: GOLD-1234" class="w-full p-3 rounded bg-slate-700 border border-slate-600 mb-4 focus:outline-none focus:border-yellow-500">
+    <main id="seccion-canjear" class="container mx-auto mt-16 text-center px-4 hidden">
+        <div class="max-w-md mx-auto bg-slate-800 p-8 rounded-3xl border border-slate-700 shadow-2xl">
+            <h2 class="text-3xl font-bold mb-2 text-yellow-500">Canjear Código</h2>
+            <p class="text-slate-400 mb-8 text-sm">Introduce el código de tu boleto físico o digital.</p>
             
-            <button onclick="alert('¡Prueba exitosa! Aquí se conectará con la base de datos luego.')" class="w-full bg-yellow-600 hover:bg-yellow-500 text-white font-bold py-3 rounded transition">
-                Validar Código
-            </button>
+            <div class="text-left">
+                <label class="block mb-2 text-xs uppercase tracking-wider text-slate-500 font-bold">Código de Validación</label>
+                <input type="text" id="input-codigo" placeholder="Ejem: GOLD-888" 
+                    class="w-full p-4 rounded-xl bg-slate-900 border border-slate-700 mb-6 focus:outline-none focus:ring-2 focus:ring-yellow-500 text-yellow-400 font-mono text-xl transition-all">
+                
+                <button onclick="validar()" class="w-full bg-yellow-600 hover:bg-yellow-500 active:scale-95 text-white font-black py-4 rounded-xl shadow-lg shadow-yellow-900/20 transition-all uppercase tracking-widest">
+                    Verificar Boleto
+                </button>
+            </div>
         </div>
     </main>
 
     <script>
         function mostrarSeccion(nombre) {
-            // Ocultamos ambas
-            document.getElementById('seccion-inicio').classList.add('hidden');
-            document.getElementById('seccion-canjear').classList.add('hidden');
+            // Seleccionamos las secciones
+            const inicio = document.getElementById('seccion-inicio');
+            const canjear = document.getElementById('seccion-canjear');
 
-            // Mostramos solo la que queremos
             if (nombre === 'inicio') {
-                document.getElementById('seccion-inicio').classList.remove('hidden');
-            } else if (nombre === 'canjear') {
-                document.getElementById('seccion-canjear').classList.remove('hidden');
+                inicio.classList.remove('hidden');
+                canjear.classList.add('hidden');
+            } else {
+                inicio.classList.add('hidden');
+                canjear.classList.remove('hidden');
+            }
+        }
+
+        function validar() {
+            const codigo = document.getElementById('input-codigo').value;
+            if(codigo.trim() === "") {
+                alert("Por favor, escribe un código primero.");
+            } else {
+                alert("Verificando código: " + codigo + "\n\nEste es el paso donde Supabase nos dirá si es real.");
             }
         }
     </script>
