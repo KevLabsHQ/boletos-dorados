@@ -10,16 +10,16 @@
 
     <nav class="bg-slate-800 p-4 shadow-xl">
         <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold text-yellow-500"> Boletos Dorados</h1>
+            <h1 class="text-2xl font-bold text-yellow-500">Boletos Dorados</h1>
             <ul class="flex gap-6">
-                <li><a href="#" class="hover:text-yellow-400">Inicio</a></li>
-                <li><a href="#" class="hover:text-yellow-400">Canjear</a></li>
+                <li><a href="#" onclick="mostrarSeccion('inicio')" class="hover:text-yellow-400">Inicio</a></li>
+                <li><a href="#" onclick="mostrarSeccion('canjear')" class="hover:text-yellow-400">Canjear</a></li>
                 <li><a href="#" class="hover:text-yellow-400 text-red-400">Sorteo</a></li>
             </ul>
         </div>
     </nav>
 
-    <main class="container mx-auto mt-10 text-center px-4">
+    <main id="seccion-inicio" class="container mx-auto mt-10 text-center px-4">
         <h2 class="text-4xl font-extrabold mb-4">¡Bienvenidos a la Comunidad!</h2>
         <p class="text-slate-400 mb-8">Próximamente podrás canjear tus códigos aquí.</p>
         
@@ -27,6 +27,35 @@
             <p class="text-lg">Estado del sistema: <span class="text-green-400 font-mono">EN LÍNEA</span></p>
         </div>
     </main>
+
+    <main id="seccion-canjear" class="container mx-auto mt-10 text-center px-4 hidden">
+        <h2 class="text-4xl font-extrabold mb-4 text-yellow-500">Canjear Código</h2>
+        <p class="text-slate-400 mb-8">Ingresa tu código secreto para recibir tu premio.</p>
+        
+        <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700 inline-block shadow-2xl w-full max-w-md text-left">
+            <label class="block mb-2 text-sm font-medium">Código del Boleto:</label>
+            <input type="text" placeholder="Ej: GOLD-1234" class="w-full p-3 rounded bg-slate-700 border border-slate-600 mb-4 focus:outline-none focus:border-yellow-500">
+            
+            <button onclick="alert('¡Prueba exitosa! Aquí se conectará con la base de datos luego.')" class="w-full bg-yellow-600 hover:bg-yellow-500 text-white font-bold py-3 rounded transition">
+                Validar Código
+            </button>
+        </div>
+    </main>
+
+    <script>
+        function mostrarSeccion(nombre) {
+            // Ocultamos ambas
+            document.getElementById('seccion-inicio').classList.add('hidden');
+            document.getElementById('seccion-canjear').classList.add('hidden');
+
+            // Mostramos solo la que queremos
+            if (nombre === 'inicio') {
+                document.getElementById('seccion-inicio').classList.remove('hidden');
+            } else if (nombre === 'canjear') {
+                document.getElementById('seccion-canjear').classList.remove('hidden');
+            }
+        }
+    </script>
 
 </body>
 </html>
