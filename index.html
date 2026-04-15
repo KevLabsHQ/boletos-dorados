@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sorteo Boletos Dorados</title>
+    <title>KevinGeek</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="app.js" defer></script>
+
     <style>
-        /* Esto evita que el cursor se vea raro y asegura el clic */
         .nav-link { cursor: pointer; }
     </style>
 </head>
@@ -60,30 +64,6 @@
         </div>
     </main>
 
-    <script>
-        function mostrarSeccion(nombre) {
-            // Seleccionamos las secciones
-            const inicio = document.getElementById('seccion-inicio');
-            const canjear = document.getElementById('seccion-canjear');
-
-            if (nombre === 'inicio') {
-                inicio.classList.remove('hidden');
-                canjear.classList.add('hidden');
-            } else {
-                inicio.classList.add('hidden');
-                canjear.classList.remove('hidden');
-            }
-        }
-
-        function validar() {
-            const codigo = document.getElementById('input-codigo').value;
-            if(codigo.trim() === "") {
-                alert("Por favor, escribe un código primero.");
-            } else {
-                alert("Código Reclamado: " + codigo + "\n\nEsto es un ejemplo de codigo.");
-            }
-        }
-    </script>
-
+    
 </body>
 </html>
